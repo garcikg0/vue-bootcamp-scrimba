@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <h1>Contact Form</h1>
+            
+            <form method="post" action="#">
+                <div>
+                    <label for="name">Name</label>
+                    <input name="name" id="name" v-model="name" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" id="email" v-model="email" />
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" v-model="message"></textarea>
+                </div>
+                
+                <button @click.prevent>Send Form</button>
+            </form>
+
+            <h2>Form Details</h2>
+            
+            <p><strong>Name</strong> {{ name }}</p>
+            <p><strong>Email</strong> {{ email }}</p>
+            <p><strong>Message</strong> {{ message }}</p>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    name: '',
+                    email: '',
+                    message: '',
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Task was to add validation where we would get an error message if all of the fields were not filled in when click submit button. If all fields are filled, then we send a message saying Form Sent.-->
+<!-- Added p tag in line 12 and added validateForm method in line 51 with a conditional -->
+<!-- He refactored the data key in Vue instance to make form info into a nested object with each individual input field data as it's being typed. He said it was common to see forms like this in Vue.-->
+
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <h1>Contact Form</h1>
+            
+            <p style="color: red;">{{ error }}</p>
+            
+            <form method="post" action="#">
+                <div>
+                    <label for="name">Name</label>
+                    <input name="name" id="name" v-model="form.name" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" id="email" v-model="form.email" />
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" v-model="form.message"></textarea>
+                </div>
+                
+                <button @click.prevent="validateForm">Send Form</button>
+            </form>
+
+            <h2>Form Details</h2>
+            
+            <p><strong>Name</strong> {{ form.name }}</p>
+            <p><strong>Email</strong> {{ form.email }}</p>
+            <p><strong>Message</strong> {{ form.message }}</p>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    form: {
+                        name: '',
+                        email: '',
+                        message: '',
+                    },
+                    error: '',
+                },
+                methods: {
+                    validateForm: function () {
+                        if (this.form.name.length && this.form.email.length && this.form.message.length) {
+                            return this.error = 'Form Sent!';
+                        }
+                        
+                        return this.error = 'Invalid Form';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

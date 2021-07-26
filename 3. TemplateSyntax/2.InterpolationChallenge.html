@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col items-center h-screen w-full text-sm">
+            
+            <!-- Simple output text -->
+            <div>{{ example }}</div>
+            
+            <!-- Only Once -->
+            <div v-once>{{ onlyOnce }}</div>
+            
+            <!-- Sample HTML -->
+            <div v-html="sampleHtml"></div>
+            
+            <!-- Output 'text' without curly braces -->
+            <div v-text="text"></div>
+            
+            <!-- If answer is true, output 'Correct!'. Otherwise, 'Wrong!' -->
+            <div>{{ answer ? 'Correct!' : 'Wrong!' }}</div>
+            
+            <!-- Output: 'My dog is 9 years old' -->
+            <div>My dog is {{ age }} years old</div>
+            <!-- instructor's solutions for above exercise -->
+            <div>{{ 'My dog is ' + age + ' years old' }}</div>
+            <div v-text="'My dog is ' + age + ' years old'"></div>
+            
+            <!-- What is the area of this circle? (HINT: πr^2) -->
+            <!-- Where π = 3.14 -->
+            <div>The area of this circle is {{ (3.14 * circleRadius) ** 2}}</div>
+            <!-- Math is wrong above. Solutions are: -->
+            <div>{{ 3.14 * (circleRadius * circleRadius) }}</div>
+            <div>{{ 3.14 * Math.pow(circleRadius, 2) }}</div>
+
+            
+            <!-- Add a title attribute to show the explain text. -->
+            <!-- Add the string 'Hello! ' on the fly before the text -->
+            <div :title="'Hello! ' + explain">Hover Over Me</div>
+            <!-- example of using longhand of above solution with 'v-bind'-->
+            <div v-bind:title="'Hello! ' + explain">Hover Over Me</div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    example: 'Learning Never Exhausts The Mind.',
+                    onlyOnce: 'I will not update!',
+                    sampleHtml: '<ul><li>Item 1</li><li>Item 2</li></ul>',
+                    text: 'Another way to output text!',
+                    answer: true,
+                    age: 9,
+                    circleRadius: 10,
+                    explain: 'Here is some text that explains this div.'
+                }
+            });
+        </script>
+    </body>
+</html>

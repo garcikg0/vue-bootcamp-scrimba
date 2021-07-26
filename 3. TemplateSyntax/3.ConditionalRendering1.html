@@ -1,0 +1,138 @@
+<!-- v-if="boolean" is the way to conditionally render an element (line 11)-->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full text-sm">
+            
+            <div v-if="true" class="w-20 h-20 bg-red-700">&nbsp;</div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- attach v-if to a piece of data (line 36 & line 44)-->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full text-sm">
+            
+            <div v-if="box" class="w-20 h-20 bg-red-700">&nbsp;</div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    box: true,
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Can use a conditional with numbers is also an option (line 61 & line 69) -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full text-sm">
+            
+            <div v-if="box > 5" class="w-20 h-20 bg-red-700">&nbsp;</div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    box: 10,
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Can attach to a computed property -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full text-sm">
+            
+            <div v-if="boxShow" class="w-20 h-20 bg-red-700">&nbsp;</div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    box: 10,
+                },
+                computed: {
+                    boxShow: function () {
+                        return this.box > 5;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- You can use the template syntax when you want to group things together that you want some particular logic applied to it. You could wrap in a div or span, however, that will add additional markup (can affect how CSS behaves). Use template as a grouping component in Vue -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full text-sm">
+            
+            <template v-if="boxShow" >
+                <div class="w-20 h-20 bg-red-700">&nbsp;</div>
+                <div class="w-20 h-20 bg-red-700">&nbsp;</div>
+                <div class="w-20 h-20 bg-red-700">&nbsp;</div>
+            </template>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    box: 10,
+                },
+                computed: {
+                    boxShow: function () {
+                        return this.box > 15;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

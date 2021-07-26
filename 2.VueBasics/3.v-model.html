@@ -1,0 +1,36 @@
+<!-- V-model allows you to tie in an input field in HTML to a particular data property in Vue instance. Vue does reactivity automatically -->
+
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <input name="field" v-model="field" />
+
+            <p>The current values is: {{ exclamation }} </p>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    field: '',
+                },
+                computed: {
+                    exclamation: function() {
+                        return this.field + '!';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Here, we are using a computed property (exclamation) on a binded field -->
+
+<!-- we learned how to turn once simple input field into a reactive input field, where we are able to update the data inside of our Vue instance automatically using the v-model syntax -->

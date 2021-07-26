@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <input name="field" v-model="field"/>
+
+            <p>The current value is {{ field }} </p>
+            
+            <button @click="modified">Click ME</button>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    field: '',
+                },
+                methods: {
+                    modified: function() {
+                        this.field += '!';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Methods and computed properties are simple functions. The main difference between a computed property and a method is that a method does not have reactivity. A method needs to be triggered. -->
+<!-- The way to trigger a method is with an event listener. Syntax to bind into an event in Vue is @click="methodName" -->
+<!-- Computed properties are only re-rendered if the DOM needs to be re-rendered. If the diff is complete and no changes, then the computed property doesn't cost you a thing. However, when you have a method, it is always calculated and takes computational time -->

@@ -1,0 +1,189 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div>{{ message }}</div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello',
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Interpolation means putting text inside a particular string. We've been doing that with the mustache syntax {{ text }} -->
+<!-- 'v-once' added to an element will not refresh to a new value, it will show the original value without Vue changing it everytime the data gets updated -->
+
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div v-once>Old: {{ message }}</div>
+            
+            <div>New: {{ message }}</div>
+            
+            <input v-model="message" />
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello',
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Sometimes you need to save a string that has some HTML, perhaps markup that got translated into HTML and want to push it back into the DOM -->
+<!-- ' v-html="dataName"' and taking text out will replace string with HTML markup-->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div v-html="message"></div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: '<strong>HELLO</strong>',
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Another version of above, but outputting text only not taking into consideration any HTML markup : ' v-text="dataName" ' -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div v-text="message"></div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: '<strong>HELLO</strong>',
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- JavaScript Notations: make datapoint into boolean and add conditional to render selected message/element/component -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div>{{ message ? 'YES' : 'NO' }}</div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: false,
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Similar example as above but with inline conditional on specific text -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div>{{ message === 'hello' ? 'YES' : 'NO' }}</div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'hello',
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Similar example as above but using numbers as data type -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div>{{ message + 200 }}</div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 100,
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- you can do string interpolation for HTML element attributes like title -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full">
+            <div :title="'before ' + message">{{ message + 200 }}</div>
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'hello title',
+                }
+            });
+        </script>
+    </body>
+</html>

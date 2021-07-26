@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <input name="field" v-model="fullName" />
+            
+            <p>The current firstName values is: {{ firstName }}</p>
+            <p>The current lastName values is: {{ lastName }}</p>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    field: '',
+                    firstName: '',
+                    lastName: '',
+                },
+                computed: {
+                    fullName: {
+                        get: function(){
+                            return this.firstName + ' ' + this.lastName;
+                        },
+                        set: function(newValue){
+                            var names = newValue.split(' ');
+                            this.firstName = names[0];
+                            this.lastName = names[1];
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Sometimes we need a way to manipulate the data as it's coming in. Computed properties are by default getters only. We have no way to tell it how it's supposed to set the attribute before it actually does. For example, when we have a first name and a last name, having each name as a separat value from each other. When a user types into the field, I want to split it where there is a space, telling us that the user has moved on from writing first name to writing last name. To do this, we can use a computed property -->
+<!-- A computed property can be set to an object that has two keys: get key with a function, a set key with an argument of newValue -->

@@ -1,0 +1,24 @@
+<!-- Declaritive Rendering & Attributes -->
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app" :title="message">
+            {{ message }}
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    'message': 'Learning Vue',
+                    'platform': 'Scrimba'
+                }
+            });
+        </script>
+    </body>
+</html>
+

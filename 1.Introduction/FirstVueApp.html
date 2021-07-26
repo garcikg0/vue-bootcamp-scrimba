@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <!-- Anything inside of this div available to your Vue instance because we wrapped it in App Id (line 15) -->
+        <div id="app">
+            {{ message }} <!-- JavaScript block where you can add any number of things -->
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Learning Vue!',
+                }
+            });
+        </script>
+    </body>
+</html>

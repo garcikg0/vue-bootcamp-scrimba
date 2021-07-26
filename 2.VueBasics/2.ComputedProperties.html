@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            {{ reversedMessage }}
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Learning Vue'
+                },
+                computed: {
+                    exclamation: function() {
+                        return this.message + `!!!`;
+                    },
+
+                    reversedMessage: function() {
+                        return this.exclamation.split('').reverse().join('')
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Computed Properties are written just like functions. In this example, add a computed property that adds exclamation points.  -->
+
+<!-- Computed Properties can also call on other computer properties. You can stack computed properties on top of eachother, as seen above. Took two computed properties independent of eachother, but we layered on the reversedMessage on top of the exclamation computed property -->

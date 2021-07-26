@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <h1>Contact Form</h1>
+            
+            <p style="color: red;">{{ error }}</p>
+            
+            <form method="post" action="#">
+                <div>
+                    <label for="name">Name</label>
+                    <input name="name" id="name" v-model="form.name" />
+                    <p></p>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" id="email" v-model="form.email" />
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" v-model="form.message"></textarea>
+                </div>
+                
+                <button @click.prevent="validateForm">Send Form</button>
+            </form>
+
+            <h2>Form Details</h2>
+            
+            <p><strong>Name</strong> {{ form.name }}</p>
+            <p><strong>Email</strong> {{ form.email }}</p>
+            <p><strong>Message</strong> {{ form.message }}</p>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    form: {
+                        name: '',
+                        email: '',
+                        message: '',
+                    },
+                    error: '',
+                },
+                methods: {
+                    validateForm: function () {
+                        if (this.form.name.length && this.form.email.length && this.form.message.length) {
+                            return this.error = 'Form Sent!';
+                        }
+                        
+                        return this.error = 'Invalid Form';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Added error messages with each individual field saying which field is required. Uses a computed property, one for each field,, to show a p tag with the field that is required.-->
+<!-- Note how computed validation functions check if the field is empty and if there is no error -->
+
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <h1>Contact Form</h1>
+            
+            <p style="color: red;">{{ error }}</p>
+            
+            <form method="post" action="#">
+                <div>
+                    <label for="name">Name</label>
+                    <input name="name" id="name" v-model="form.name" />
+                    <p style="color: red;">{{ nameValidation }}</p>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" id="email" v-model="form.email" />
+                    <p style="color: red;">{{ emailValidation }}</p>
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" v-model="form.message"></textarea>
+                    <p style="color: red;">{{ messageValidation }}</p>
+                </div>
+                
+                <button @click.prevent="validateForm">Send Form</button>
+            </form>
+
+            <h2>Form Details</h2>
+            
+            <p><strong>Name</strong> {{ form.name }}</p>
+            <p><strong>Email</strong> {{ form.email }}</p>
+            <p><strong>Message</strong> {{ form.message }}</p>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    form: {
+                        name: '',
+                        email: '',
+                        message: '',
+                    },
+                    error: '',
+                },
+                methods: {
+                    validateForm: function () {
+                        if (this.form.name.length && this.form.email.length && this.form.message.length) {
+                            return this.error = 'Form Sent!';
+                        }
+                        
+                        return this.error = 'Invalid Form';
+                    }
+                }, 
+                computed: {
+                    nameValidation: function () {
+                        if ( ! this.form.name.length && this.error) {
+                            return 'Name Field is Required';
+                        }
+                    },
+                    emailValidation: function () {
+                        if ( ! this.form.email.length && this.error) {
+                            return 'Email Field is Required';
+                        }
+                    },
+                    messageValidation: function () {
+                        if ( ! this.form.message.length && this.error) {
+                            return 'Message Field is Required';
+                        }
+                    },
+                }
+            });
+        </script>
+    </body>
+</html>

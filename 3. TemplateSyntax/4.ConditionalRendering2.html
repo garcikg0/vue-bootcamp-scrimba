@@ -1,0 +1,29 @@
+<!-- Like standard conditionals, there is v-if , v-else , v-else-if for conditional rendering. v-else is the default when all other v-if or v-else-if statments cascade to false -->
+
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 flex flex-col justify-center items-center h-screen w-full text-sm">
+            
+            <div v-if="number < 5" class="w-20 h-20 bg-red-700">&nbsp;</div>
+            <div v-else-if="number > 10" class="w-20 h-20 bg-gray-700">&nbsp;</div>
+            <div v-else class="w-20 h-20 bg-green-700">&nbsp;</div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    number: 9,
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- these conditional rendering properties (v-if, v-else-if, v-else) are destructive in terms of the DOM. It will physically remove that element from the DOM. It is different from hiding or showing an element -->
