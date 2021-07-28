@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col pt-12 items-center text-sm relative">
+            
+            <h1 class="mb-3 font-bold uppercase">My Todo List</h1>
+            
+            <div class="mb-4">
+                <input />
+                <!-- binded into data property -->
+                <button>Add</button>
+                <!-- click action that triggers a method where we add input to items array -->
+            </div>
+            
+            <div>
+                <ul>
+                    <li>Item 1</li>
+                    <!-- use v-for to iterate through the items array and generate our list. When we add a new item, it will automatically re-render -->
+                </ul>
+            </div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    items: []
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- my solution -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col pt-12 items-center text-sm relative">
+            
+            <h1 class="mb-3 font-bold uppercase">My Todo List</h1>
+            
+            <div class="mb-4">
+                <input v-model="field"/>
+                <button @click.prevent="addButton">Add</button>
+            </div>
+            
+            <div>
+                <ul>
+                    <template v-for="item in items">
+                        <li>{{ item }}</li>
+                    </template>
+                </ul>
+            </div>
+
+            <!-- instructor's solution for iterating array to render <li> of items and resulted same as above-->
+                <div>
+                    <ul>
+                        <li v-for="item in items">{{ item }}</li>
+                    </ul>
+                </div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    items: [],
+                    field: '',
+                },
+                methods: {
+                    addButton: function() {
+                        this.items.push(this.field)
+                        this.field = ''
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,121 @@
+<!-- 'v-for="statement"' this is the syntax for the v-for directive in Vue -->
+
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            
+            <!-- i is for index: this will give you 5 copies of the div above -->
+            <div v-for="i in 5">Hello</div>
+            
+            <!-- you can access the index (i) - you can output 5 -->
+            <div v-for="i in 5">Hello {{ i }}</div>
+            <!-- this will output "Hello 1, Hello 2, etc." it's not 0 based index because "5" is generating an array of 1-5 -->
+
+            <!-- you can access the key by wrapping i in parenthesis and add a second argument of the key "(i, k) in 5" and swap i with k to render the correct index (key) -->
+            <div v-for="(i, k) in 5">Hello {{ k }}</div>
+            <!-- this will output "Hello 0, Hello 1, Hello 2, etc." -->
+
+            <!-- you can loop through an array in data. In this case we're using the list attribute in data -->
+            <div v-for="i in list">Hello {{ k }}</div>
+            <!-- this will output "Hello" 3 times without outputing anything out because we haven't defined k-->
+
+            <div v-for="i in list">Hello {{ i }}</div>
+            <!-- this will output "Hello item 1, Hello item 2, Hello item 3" -->
+
+            <!-- we can rename i for whatever it is to make code more readable. We can change i to item -->
+            <div v-for="item in list">Hello {{ item }}</div>
+            <!-- this will output "Hello item 1, Hello item 2, Hello item 3" -->
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    list: [
+                        'item 1', 'item 2', 'item 3'
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- we can iterate an array of objects in list attribute in data -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            
+            <div v-for="item in list">Hello {{ item.name }} ({{ item.age }})</div>
+            <!-- this will output "Hello John (25), Hello Jane (20) "-->
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    list: [
+                        { name: 'John', age: 25 },
+                        { name: 'Jane', age: 20 },
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Great use case for this are dropdown menus -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            
+            <select>
+                <option>Please select one</option>
+                <option v-for="item in list" value="item.age" v-text="item.name"></option>
+            </select>
+            <!-- the dropdown menu will have 3 options: Please select one, John, Jane. -->
+
+            <!-- could also use {{ text }} instead of v-text to render the same as above-->
+            <select>
+                <option>Please select one</option>
+                <option v-for="item in list" value="item.age">{{ item.name }}</option>
+            </select>
+
+            <!-- you can use v-for with template element. Template allows you to use v-for without adding additional markup. Template is useful for wrapping and gropuing things with v-for or v-ifs without additional markups. You don't always have to wrap your items in a div tag (or similar elements). When DOM does the DOM diffing, it also removes any vue-specific code like template and v-ifs get stripped away -->
+            <template v-for="item in list">
+                <p>{{ item.name }}</p>
+                <p>{{ item.age }}</p>
+            </template>
+            <!-- this will output: John, 25, Jane, 20-->
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    list: [
+                        { name: 'John', age: 25 },
+                        { name: 'Jane', age: 20 },
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>

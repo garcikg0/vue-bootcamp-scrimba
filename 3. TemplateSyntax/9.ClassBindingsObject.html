@@ -1,0 +1,60 @@
+<!-- up until now, the bindings we have done have been to a piece of data. Another convenient feature in vue allows us to add classes and inline styles to a particular element (div, p, li, etc.)  -->
+
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <style>
+            .danger {
+                color: red;
+            }
+            .active {
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            <!-- standard way of adding an inline style class to an element (div in this case) -->
+            <div class="danger">Text</div>
+            <!-- how could we do the above dynamically? Use the object syntax : v-bind:class:"{ 'class(key)' : boolean(value) }" -->
+            <div v-bind:class="{ 'danger': isDanger }">Text</div>
+            
+            <!-- you can assume there is a regular class after it, for example -->
+            <div v-bind:class="{ 'danger': isDanger }" class="font-bold">Text</div>
+            
+            <!-- another shortcut is to remove 'v-bind' and keep the colon in front of 'class' -->
+            <div :class="{ 'danger': isDanger }" class="font-bold">Text</div>
+
+            <!-- you can use two pieces of data with object syntax, simply add another item to the object with a comma -->
+            <div :class="{ 'danger': isDanger, 'font-bold': important }">Text</div>
+
+            <!-- you can also inline the object syntax into a data property/attribute. Note the property/attribute is set to an object -->
+            <div :class="myDiv">Text</div>
+
+            <!-- you can also use a computed property in the object syntax -->
+            <div :class="styling">Text</div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    isDanger: true,
+                    important: true,
+                    myDiv: { 'danger': true, 'font-bold': false }
+                },
+                computed: {
+                    styling: function () {
+                        return {
+                            'danger': 25 > 5,
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

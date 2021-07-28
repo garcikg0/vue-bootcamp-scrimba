@@ -8,23 +8,23 @@
         <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
             
             <p class="text-xs mb-8">0-5 = GOOD; 6-8 = WARNING; 9-10 = DANGER</p>
-            <p>Current Status: ?</p>
+            <p>Current Status: {{ status }}</p>
             
-            <div class="w-32 bg-green-200 text-center py-2">
+            <div v-if="status >= 0 && status <= 5" class="w-32 bg-green-200 text-center py-2">
                 GOOD
             </div>
             
-            <div class="w-32 bg-yellow-200 text-center py-2">
+            <div v-else-if="status > 5 && status <= 8" class="w-32 bg-yellow-200 text-center py-2">
                 WARNING
             </div>
             
-            <div class="w-32 bg-red-200 text-center py-2">
+            <div v-else class="w-32 bg-red-200 text-center py-2">
                 DANGER
             </div>
             
             <div class="text-xl mt-4">
-                <button class="px-3 border rounded">-</button>
-                <button class="px-3 border rounded">+</button>
+                <button v-if="status > 0" @click.prevent="decrement" class="px-3 border rounded">-</button>
+                <button v-if="status < 10 " @click.prevent="increment" class="px-3 border rounded">+</button>
             </div>
             
         </div>
@@ -33,7 +33,23 @@
             var app = new Vue({
                 el: '#app',
                 data: {
-                    
+                    status: 0,
+                },
+                methods: {
+                    increment: function () {
+                        if (this.status >= 10) {
+                            return;
+                        }
+                        
+                        this.status++;
+                    },
+                    decrement: function () {
+                        if (this.status <= 0) {
+                            return;
+                        }
+                        
+                        this.status--;
+                    }
                 }
             });
         </script>
