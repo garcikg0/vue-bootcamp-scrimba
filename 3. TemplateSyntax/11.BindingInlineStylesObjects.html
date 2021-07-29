@@ -1,0 +1,49 @@
+<!-- Object syntax : v-bind:style="{ style }" -->
+<!-- Array syntax : v-bind:style="[style]"-->
+
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            
+            <!-- you can change inline style directly with object notation -->
+            <div v-bid:style="{ color: 'red' }">Text</div>
+            <div v-bind:style="{ color: '#cccccc' }">Text</div>
+
+            <!-- you can also set the inline style with a piece of data -->
+            <div v-bid:style="{ color: myColor }">Text</div>
+
+            <!-- you can add more inline styling like font size. -->
+            <div v-bind:style="{ color: myColor, 'font-size': '25px' }">Text</div>
+            <!-- you can use CamelCase or Kebab-Case (as seen above) to achieve the same result/render -->
+            <div v-bind:style="{ color: myColor, fontSize: '25px' }">Text</div>
+            
+            <!-- the right of the colon of the object syntax can also use data to reference styling (make sure to add unit like px, em, etc.). Here we turn a simple integer of size into the proper css size needed -->
+            <div v-bind:style="{ color: myColor, fontSize: size + 'px' }">Text</div>
+            
+            <!-- inline style object in data can be used as well -->
+            <div v-bind:style="myStyles">Text</div>
+
+            <!-- array syntax example - same return/render as above -->
+            <div v-bind:style="[myStyles]">Text</div>
+
+
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    myColor: '#123123',
+                    size: 50,
+                    myStyles: { color: 'red', fontSize: 100 + 'px'}
+                },
+            });
+        </script>
+    </body>
+</html>

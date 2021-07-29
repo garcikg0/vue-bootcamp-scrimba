@@ -1,0 +1,213 @@
+<!-- Simple way create navigation that is data driven, that doesn't require to change all of your markup, reusable  -->
+<!-- Note index.css file used for styling for this module -->
+<!-- Skeleton / standard approach below for navbar in this module-->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <div id="app">
+            
+            <nav class="nav-wrapper">
+
+                <div class="logo">
+                    Vue
+                </div>
+                <div>
+                    <a href="#" class="link-item">Home</a>
+                    <a href="#" class="link-item">Services</a>
+                </div>
+            </nav>
+
+            <div class="body-text">
+                Learning Vue on Scrimba!
+            </div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Data driven approach with Vue below for navbar in this module-->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <div id="app">
+            
+            <nav class="nav-wrapper">
+
+                <div class="logo">
+                    Vue
+                </div>
+                <div>
+                    <!-- using v-for to output nav property (array) in data. Note to add colon (:) in front of href. Use {{ }} to output correct text/title -->
+                    <a v-for="item in nav" :href="item.link" class="link-item">{{ item.title }}</a>
+                </div>
+            </nav>
+
+            <div class="body-text">
+                Learning Vue on Scrimba!
+            </div>
+
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    nav: [
+                        { title: 'Home', link:'#home'},
+                        { title: 'Services', link:'#services'}
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Dropdown menu in Services for sublinks in navbar by adding a new key in data. The new key is an array of objects - almost like a nested route. Created dropdown by removing v-for in anchor tag, wrapping anchor tag in a div with v-for. Added new div for sublinks, wrapped sublink anchor tags in a template element with a v-if checking if sublinks exist in data. Added additional key for in data subLinkModal and added click listener to anchor tag where click listener is handled with a method. Addeed new method.-->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <div id="app">
+            
+            <nav class="nav-wrapper">
+                
+                <div class="logo">
+                    Vue
+                </div>
+                <div class="flex">
+                    <div v-for="item in nav">
+                        <!-- link is iterating through v-for above and don't have access to v-for when using a method. We can pass item (from v-for above) to method/function and it will bind with data key at bottom  -->
+                        <a :href="item.link" class="link-item" @click="toggleSubModal(item)">{{ item.title }}</a>
+                        
+                        <template v-if="item.subLinks && item.subLinkModal">
+                            <div class="sublinks">
+                                <a v-for="subLink in item.subLinks" :href="subLink.link" class="link-item">{{ subLink.title }}</a>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+            </nav>
+            
+            <div class="body-text">
+                Learning Vue on Scrimba!
+            </div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    nav: [
+                        { title: 'Home', link: '#home' },
+                        { title: 'About', link: '#about' },
+                        { title: 'Services', link: '#services', subLinks: [
+                            { title: 'Audio', link: '#audio' },
+                            { title: 'Video', link: '#video' },
+                            { title: 'Web', link: '#web' },
+                        ], subLinkModal: false },
+                    ]
+                },
+                methods: {
+                    toggleSubModal: function (item) {
+                        if (item.subLinks) {
+                            item.sublinkModal = ! item.subLinkModal;
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<!-- Have an active class whenever modal is open. Have active class on Services button in navbar if it's modal of sublinks is open -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <div id="app">
+            
+            <nav class="nav-wrapper">
+                
+                <div class="logo">
+                    Vue
+                </div>
+                <div class="flex">
+                    <div v-for="item in nav">
+                        <!-- although we have a regular class for styling on this anchor element, we can apply another class to give it a background whenever it is active (line 167)-->
+                        <a :href="item.link" 
+                            class="link-item" 
+                            :class="[ {item.subLinkModal} ? 'link-active', : '']"
+                            @click="toggleSubModal(item)">
+                                {{ item.title }}
+                        </a>
+                        
+                        <template v-if="item.subLinks && item.subLinkModal">
+                            <div class="sublinks">
+                                <a v-for="subLink in item.subLinks" :href="subLink.link" class="link-item">{{ subLink.title }}</a>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+            </nav>
+            
+            <div class="body-text">
+                Learning Vue on Scrimba!
+            </div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    nav: [
+                        { title: 'Home', link: '#home' },
+                        { title: 'About', link: '#about' },
+                        { title: 'Services', link: '#services', subLinks: [
+                            { title: 'Audio', link: '#audio' },
+                            { title: 'Video', link: '#video' },
+                            { title: 'Web', link: '#web' },
+                        ], subLinkModal: false },
+                    ]
+                },
+                methods: {
+                    toggleSubModal: function (item) {
+                        if (item.subLinks) {
+                            item.subLinkModal = ! item.subLinkModal;
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <style>
+            .red { color: red; }
+            .big { font-size: 100px; }
+            .underline { text-decoration: underline; }
+        </style>
+        
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            
+            <!-- Red Text if 5 > 1 -->
+            <div>Text 1</div>
+            
+            <!-- Use size for text size (inline) -->
+            <div>Text 2</div>
+            
+            <!-- underline and red text if toggle is true -->
+            <div>Text 3</div>
+            
+            <!-- orange text (inline) -->
+            <div>Text 4</div>
+            
+            <!-- red if toggle is true, otherwise big. Always underline -->
+            <div>Text 5</div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    size: 25,
+                    toggle: true,
+                },
+            });
+        </script>
+    </body>
+</html>
+
+<!-- my solution -->
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <style>
+            .red { color: red; }
+            .big { font-size: 100px; }
+            .underline { text-decoration: underline; }
+        </style>
+        
+    </head>
+    <body>
+        <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
+            
+            <!-- Red Text if 5 > 1 -->
+            <div :class="{ 'red': 5 > 1 }">Text 1</div>
+            
+            <!-- Use size for text size (inline) -->
+            <div :style="{ fontSize: size + 'px' }">Text 2</div>
+            
+            <!-- underline and red text if toggle is true -->
+            <div :class="{ 'underline': toggle, 'red': toggle}">Text 3</div>
+                <!-- instructor solution using array syntax -->
+                <div :class="[ toggle ? 'underline red' : '' ]">Text 3</div>
+            
+            <!-- orange text (inline) -->
+            <div :style="{ color: 'orange' }">Text 4</div>
+            
+            <!-- red if toggle is true, otherwise big. Always underline -->
+            <div :class="[ toggle ? 'red' : 'big', 'underline' ]">Text 5</div>
+                <!-- instructor solution with additional regular class attribute -->
+                <div :class="[ toggle ? 'red' : 'big']" class="underline">Text 5</div>
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    size: 25,
+                    toggle: true,
+                },
+            });
+        </script>
+    </body>
+</html>
+

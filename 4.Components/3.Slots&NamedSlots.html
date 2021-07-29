@@ -1,0 +1,36 @@
+<!-- Components need data. We want to create a special component (Title Text) -->
+
+<html>
+    <head>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app" class="bg-blue-200 w-full h-screen ">
+            <title-text>My Title</title-text>
+            <!-- Anything in between the opening and closing tag of component is called a slot. Default slot is anything between opening and closing tag of component. -->
+            <!-- Added slot tag to template to render -->
+            <!-- Can add additional markup inside slot, for example -->
+            <title-text>
+                <ul>
+                    <li>List</li>
+                </ul>
+            </title-text>
+
+            
+        </div>
+        
+        <script>
+            Vue.component('title-text', {
+                // template: '<div></div>'
+                template: '<div><slot></slot></div>'
+            })
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    
+                }
+            });
+        </script>
+    </body>
+</html>

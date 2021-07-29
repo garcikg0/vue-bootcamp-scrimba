@@ -1,3 +1,5 @@
+<!-- Array syntax is similar to object syntax and has an additional advantage which allows you to add multiple classes -->
+
 <html>
     <head>
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
@@ -16,7 +18,16 @@
     <body>
         <div id="app" class="bg-blue-300 h-screen w-full flex flex-col justify-center items-center text-sm relative">
             
-            <div>Text</div>
+            <div v-bind:class="[activeClass]">Text</div>
+            
+            <!-- you can do inline if statements inside arrays -->
+            <div v-bind:class="[isActive ? activeClass : errorClass ]">Text</div>
+            <!-- with one piece of data, we are controlling two other pieces of data at the same time -->
+
+            <!-- Vue allows you to combine the object notation with the array notation-->
+            <div v-bind:class="[{ activeClass : isActive }, 'font-bold']">Text</div>
+            <!-- renders active styling with bold styling. You can add on as many styles/classes as you need -->
+
             
         </div>
         
@@ -24,7 +35,9 @@
             var app = new Vue({
                 el: '#app',
                 data: {
-                    
+                    activeClass: 'active font-bold text-xl',
+                    isActive: true,
+                    errorClass: 'danger',
                 },
             });
         </script>

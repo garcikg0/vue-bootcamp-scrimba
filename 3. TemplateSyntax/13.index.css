@@ -1,0 +1,42 @@
+body {
+    background-image: url('background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1200px;
+}
+.body-text {
+    text-align: center;
+    color: #fff;
+    margin-top: 100px;
+}
+.logo {
+    color: white;
+}
+.nav-wrapper {
+    background: #252f3f;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.link-item {
+    color: #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 5px;
+    position: relative;
+}
+.link-item:active,
+.link-item:hover,
+.link-active {
+    background: #777;
+}
+.sublinks {
+    position: absolute;
+    top: 40px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background: #5145cd;
+    padding: 10px;
+    border-radius: 5px;
+}
